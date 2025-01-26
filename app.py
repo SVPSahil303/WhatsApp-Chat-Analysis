@@ -11,6 +11,10 @@ from collections import Counter
 import emoji
 import os
 from io import BytesIO
+import nltk
+
+# Ensure the VADER lexicon is downloaded
+nltk.download('vader_lexicon')
 
 app = Flask(__name__)
 
