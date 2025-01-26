@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #444444;
+        }
+        .card-header {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .card-body {
+            color: #ddd;
+        }
+        h1 {
+            color: #f39c12;
+        }
+        .btn-primary {
+            background-color: #f39c12;
+            border-color: #e67e22;
+        }
+        .btn-primary:hover {
+            background-color: #e67e22;
+            border-color: #d35400;
+        }
+        .text-center img {
+            border-radius: 10px;
+            border: 1px solid #444444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Chat Analysis Results</h1>
+
+        <!-- User Statistics -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-primary text-white">User Statistics</div>
+            <div class="card-body">
+                <p><strong>Most Active User :</strong> {{ most_active_user }}</p>
+                <ul>
+                    {% for user, count in user_stats.items() %}
+                        <li><strong>{{ user }} :</strong> {{ count }} messages</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- User Activity Over Time -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-success text-white">User Activity Over Time</div>
+            <div class="card-body text-center">
+                <img src="{{ user_activity_graph }}" alt="User Activity Over Time" class="img-fluid">
+            </div>
+        </div>
+
+        <!-- Messages by Hour -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-dark text-white">Messages by Hour</div>
+            <div class="card-body">
+                <ul>
+                    {% for hour, count in messages_by_hour.items() %}
+                        <li><strong>{{ hour }}:</strong> {{ count }} messages</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Day-wise Activity Heatmap -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-warning text-dark">Day-wise Activity Heatmap</div>
+            <div class="card-body text-center">
+                <img src="{{ heatmap }}" alt="Day-wise Activity Heatmap" class="img-fluid">
+            </div>
+        </div>
+
+        <!-- Emoji Analysis -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-secondary text-white">Emoji Analysis</div>
+            <div class="card-body">
+                <ul>
+                    {% for emoji, count in emoji_counts.items() %}
+                        <li>{{ emoji }}: {{ count }} occurrences</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Word Cloud -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-info text-white">Word Cloud</div>
+            <div class="card-body text-center">
+                <img src="{{ wordcloud_path }}" alt="Word Cloud" class="img-fluid">
+            </div>
+        </div>
+
+        <!-- Top Words -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-dark text-white">Top Words</div>
+            <div class="card-body">
+                <ul>
+                    {% for word, count in top_words %}
+                        <li><strong>{{ word }}</strong>: {{ count }} occurrences</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Network Graph -->
+        <div class="card mb-4">
+            <div class="card-header fs-5 bg-danger text-white">Network Graph</div>
+            <div class="card-body text-center">
+                <iframe src="{{ network_graph }}" style="width:100%; height:500px; border:none;"></iframe>
+            </div>
+        </div>
+
+        <!-- Download Button -->
+        <div class="text-center">
+            <a href="/download" class="btn btn-primary">Download Analysis Report</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
